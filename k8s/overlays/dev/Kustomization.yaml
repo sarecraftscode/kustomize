@@ -1,0 +1,15 @@
+bases:
+  - ../../base
+
+resources:
+  - grafana-depl.yaml
+
+patch: |-
+  - op: apiVersion: apps/v1
+    path: /spec/replicas
+    value: 2
+secretGenerator:
+  - name: db-secret
+    literals:
+      - password=devpassword
+    behavior: merge
